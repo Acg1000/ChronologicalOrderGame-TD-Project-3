@@ -20,6 +20,7 @@ protocol EventItem {
 }
 
 protocol InfoItem {
+    var title: String { get }
     var position: Int { get }
     var link: String { get }
 }
@@ -28,6 +29,7 @@ protocol InfoItem {
 
 
 struct BandInfoItem: InfoItem {
+    var title: String
     var position: Int
     var link: String
     

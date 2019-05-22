@@ -55,8 +55,12 @@ enum EventError: Error {
 }
 
 
+//------------------------------------------------
+// MARK: PLIST CONVERSION AND EXTRACTION
+//------------------------------------------------
 
-// MARK: Converts the PList to usable resourses
+
+// MARK: Converts the PList to a usuable dictionary
 
 class PlistConverter {
     static func dictonary(fromFile name: String, ofType type: String) throws -> [String: AnyObject] {
@@ -72,44 +76,46 @@ class PlistConverter {
     }
 }
 
+// MARK: Takes the dictionary and returns a collection of BandItems
 
 class EventUnarchiver {
     static func events(fromDictionary dictionary: [String: AnyObject]) throws -> [BandItem] {
+        // Create my vars
         var totalEvents = [BandItem]()
         var bandItem: BandItem
         var bandInfoItems = [BandInfoItem]()
         
         for (key, value) in dictionary {
             if let itemDictionary = value as? [String: Any] {
-                if let bandData = itemDictionary as? [String: Any], let position = bandData["position"] as? Int, let link = bandData["url"] as? String {
+                for (key2, value2) in itemDictionary {
                     
-                    var bandInfoItem = BandInfoItem(position: position, link: link)
-                    bandInfoItems.append(bandInfoItem)
+                    // Safely takes the information from the dictionary
+                    if let factData = value2 as? [String: Any], let position = factData["position"] as? Int, let link = factData["url"] as? String , let factName = key2 as? String {
+                        let bandInfoItem = BandInfoItem(title: factName, position: position, link: link)
+                        
+                        // Adds this item to the list of items
+                        bandInfoItems.append(bandInfoItem)
+                    }
                     
                 }
+                
                 
                 guard let bandName = BandNames(rawValue: key) else {
                     throw EventError.conversionFailure
-                    //FIXME more detailed error
+                    //FIXME: more detailed error
                 }
                 
+                // Creates a BandItem instance and adds that to the master collection to return
                 bandItem = BandItem(name: bandName, information: bandInfoItems)
                 totalEvents.append(bandItem)
 
             }
-//            if let itemDictionary = value as? [String: Any], let price = itemDictionary["price"] as? Double, let quantity = itemDictionary["quantity"] as? Int {
-//                let item = Item(price: price, quantity: quantity)
-//
-//                guard let selection = VendingSelection(rawValue: key) else {
-//                    throw InventoryError.invalidSelection
-//                }
-//
-//                events.updateValue(item, forKey: selection)
-//            }
         }
+        // Returns the collection
         return totalEvents
     }
 }
+
 
 class BandGameManager: GameManager {
     var sets: [ChronologicalOrderSet]
