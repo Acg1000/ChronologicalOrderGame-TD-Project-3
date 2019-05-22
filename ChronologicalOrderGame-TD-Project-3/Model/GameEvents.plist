@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>coldplay</key>
+	<dict/>
+	<key>radiohead</key>
+	<dict>
+		<key>New item</key>
+		<dict>
+			<key>position</key>
+			<integer>1</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+		<key>New item - 2</key>
+		<dict>
+			<key>position</key>
+			<integer>2</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+		<key>New item - 3</key>
+		<dict>
+			<key>position</key>
+			<integer>3</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+		<key>New item - 4</key>
+		<dict>
+			<key>position</key>
+			<integer>4</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+	</dict>
+	<key>muse</key>
+	<dict/>
+</dict>
+</plist>
