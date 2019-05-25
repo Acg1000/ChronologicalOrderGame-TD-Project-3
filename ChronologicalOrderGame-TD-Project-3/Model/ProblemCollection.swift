@@ -54,6 +54,11 @@ protocol Event {
     var url: String { get }
 }
 
+enum MovementDirections {
+    case up
+    case down
+}
+
 
 
 

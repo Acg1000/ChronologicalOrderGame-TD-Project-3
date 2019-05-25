@@ -13,6 +13,7 @@ import GameKit
 
 protocol GameManager {
     var sets: [Problem] { get }
+    var selectedSets: [Problem] { get set }
     var rounds: Int { get }
     var currentRound: Int { get set }
     var score: Int { get set }
@@ -97,6 +98,7 @@ class EventUnarchiver {
 
 class BandGameManager: GameManager {
     var sets: [Problem]
+    var selectedSets: [Problem]
     var rounds: Int
     var currentRound: Int
     var score: Int
@@ -106,6 +108,7 @@ class BandGameManager: GameManager {
         score = 0
         currentRound = 0
         sets = [Problem]()
+        selectedSets = [Problem]()
     }
     
     func generateQuestions(count: Int, upperBound: Int) {
@@ -125,23 +128,30 @@ class BandGameManager: GameManager {
         }
                 
         for number in randomNumbers {
-//            sets = information
+            selectedSets.append(sets[number])
         }
     }
     
-    func getInformation() -> [Problem] {
-        // get the questions from the plist converter
-        var set = [Problem]()
-
-        
-        return set
-    }
     
     func resetGame() {
-        
+        // Clear all the information
     }
     
     func incrementScore() {
+        score += 1
+    }
+    
+    func checkAnswers(userEvents: [String]) -> Bool{
+        let answerCounter = 0
+        for event in userEvents {
+            
+            if event == selectedSets[currentRound].events[answerCounter].title {
+                return true
+            } else {
+                return false
+            }
+        }
+        return false
         
     }
 }
