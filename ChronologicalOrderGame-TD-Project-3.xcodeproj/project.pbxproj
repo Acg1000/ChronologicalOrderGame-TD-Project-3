@@ -13,9 +13,8 @@
 		FB4E043D229372D9008876CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB4E043C229372D9008876CD /* Assets.xcassets */; };
 		FB4E0440229372D9008876CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB4E043E229372D9008876CD /* LaunchScreen.storyboard */; };
 		FB4E0448229375F5008876CD /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4E0447229375F5008876CD /* GameManager.swift */; };
-		FB4E044A2293766B008876CD /* ChronologicalOrderSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4E04492293766B008876CD /* ChronologicalOrderSet.swift */; };
 		FB4E044F2294FFFD008876CD /* GameEvents.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB4E044E2294FFFD008876CD /* GameEvents.plist */; };
-		FB4E0453229508D2008876CD /* EventItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4E0452229508D2008876CD /* EventItem.swift */; };
+		FB4E0453229508D2008876CD /* ProblemCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4E0452229508D2008876CD /* ProblemCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +26,8 @@
 		FB4E043F229372D9008876CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB4E0441229372D9008876CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB4E0447229375F5008876CD /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
-		FB4E04492293766B008876CD /* ChronologicalOrderSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronologicalOrderSet.swift; sourceTree = "<group>"; };
 		FB4E044E2294FFFD008876CD /* GameEvents.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GameEvents.plist; sourceTree = "<group>"; };
-		FB4E0452229508D2008876CD /* EventItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItem.swift; sourceTree = "<group>"; };
+		FB4E0452229508D2008876CD /* ProblemCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +75,7 @@
 		FB4E044D2294FF18008876CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FB4E04492293766B008876CD /* ChronologicalOrderSet.swift */,
-				FB4E0452229508D2008876CD /* EventItem.swift */,
+				FB4E0452229508D2008876CD /* ProblemCollection.swift */,
 				FB4E044E2294FFFD008876CD /* GameEvents.plist */,
 			);
 			path = Model;
@@ -158,8 +155,7 @@
 			files = (
 				FB4E0438229372D8008876CD /* ViewController.swift in Sources */,
 				FB4E0448229375F5008876CD /* GameManager.swift in Sources */,
-				FB4E044A2293766B008876CD /* ChronologicalOrderSet.swift in Sources */,
-				FB4E0453229508D2008876CD /* EventItem.swift in Sources */,
+				FB4E0453229508D2008876CD /* ProblemCollection.swift in Sources */,
 				FB4E0436229372D8008876CD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

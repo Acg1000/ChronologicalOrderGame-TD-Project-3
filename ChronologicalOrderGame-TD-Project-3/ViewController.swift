@@ -10,12 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let bandGameManager = BandGameManager()
+    
     required init?(coder aDecoder: NSCoder) {
         do {
             let dictionary = try PlistConverter.dictonary(fromFile: "GameEvents", ofType: "plist")
-            let inventory = try EventUnarchiver.events(fromDictionary: dictionary)
+            let eventsCollection = try EventUnarchiver.events(fromDictionary: dictionary)
             
-            print(inventory)
+            // Fills the sets with the data in the spreadsheet
+            bandGameManager.sets = eventsCollection
             
         } catch let error {
             fatalError("\(error)")
@@ -27,13 +30,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let testing = PlistConverter()
-        print(testing)
-        print("View loaded this is epic")
         
+        print(bandGameManager.sets)
+        print("View loaded this is epic")        
         // Display the first question
     }
 
+    func displayQuestion() {
+//        let currentRound = bandGameManager.currentRound
+        // get the questions
+        // assign values to their respective views
+        // Start round timer
+    }
 
 }
 
