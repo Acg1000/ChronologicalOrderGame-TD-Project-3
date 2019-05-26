@@ -3,31 +3,60 @@
 <plist version="1.0">
 <dict>
 	<key>coldplay</key>
-	<dict/>
-	<key>radiohead</key>
 	<dict>
-		<key>random fact</key>
+		<key>Released Song &quot;Yellow&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>1</integer>
 			<key>url</key>
 			<string></string>
 		</dict>
-		<key>another Random fact</key>
+		<key>Released Song &quot;Viva La Vida&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>2</integer>
 			<key>url</key>
 			<string></string>
 		</dict>
-		<key>New item - 3</key>
+		<key>random fact</key>
 		<dict>
 			<key>position</key>
 			<integer>3</integer>
 			<key>url</key>
 			<string></string>
 		</dict>
-		<key>New item - 4</key>
+		<key>Played the Super Bowl Halftime Show</key>
+		<dict>
+			<key>position</key>
+			<integer>4</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+	</dict>
+	<key>radiohead</key>
+	<dict>
+		<key>Released Song &quot;Creep&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>1</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+		<key>Released Albulm &quot;Ok Computer&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>2</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+		<key>random fact</key>
+		<dict>
+			<key>position</key>
+			<integer>3</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+		<key>Inducted into the Rock &amp; Roll Hall of Fame</key>
 		<dict>
 			<key>position</key>
 			<integer>4</integer>
@@ -36,6 +65,35 @@
 		</dict>
 	</dict>
 	<key>muse</key>
-	<dict/>
+	<dict>
+		<key>random fact</key>
+		<dict>
+			<key>position</key>
+			<integer>1</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+		<key>Released Song &quot;Starlight&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>2</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+		<key>Released Song &quot;Uprising&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>3</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+		<key>Played at the London Olympics</key>
+		<dict>
+			<key>position</key>
+			<integer>4</integer>
+			<key>url</key>
+			<string></string>
+		</dict>
+	</dict>
 </dict>
 </plist>

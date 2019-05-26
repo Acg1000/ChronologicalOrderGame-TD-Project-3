@@ -24,17 +24,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var Label3ButtonDown: UIButton!
     @IBOutlet weak var Label4Button: UIButton!
     
+    // Feilds
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var ShakeToCompleteLabel: UILabel!
+    
     
     let bandGameManager = BandGameManager()
     var gameSets = [Problem]()
+    var isTimerOn = false
+
     
     // this is the set that the user creates when they move things around
-//    var currentSet =
     
     required init?(coder aDecoder: NSCoder) {
         do {
             let dictionary = try PlistConverter.dictonary(fromFile: "GameEvents", ofType: "plist")
             let eventsCollection = try EventUnarchiver.events(fromDictionary: dictionary)
+
             
             // Fills the sets with the data in the spreadsheet
             bandGameManager.sets = eventsCollection
@@ -56,10 +62,14 @@ class ViewController: UIViewController {
         
         displayProblem()
         
-        print(bandGameManager.sets)
-        print("View loaded this is epic")        
-        // Display the first question
     }
+    
+    //------------------------------------------------
+    // MARK: APP SETUP AND PREP
+    //------------------------------------------------
+    
+    
+    // These next two things just allow for use of the device's motion sensors
     
     override var canBecomeFirstResponder: Bool {
         get {
@@ -67,14 +77,22 @@ class ViewController: UIViewController {
         }
     }
     
+    // When a device is shook
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
+            
             // collect all the answers and send it to be checked
             if let event1 = Label1.text, let event2 = Label2.text, let event3 = Label3.text, let event4 = Label4.text {
                 let currentSelection: [String] = [event1, event2, event3, event4]
                 
+                // if the answers are correct then execute the following
                 if bandGameManager.checkAnswers(userEvents: currentSelection) {
+                    bandGameManager.incrementScore()
+                    //TODO: set the label to say correct
                     print("correct")
+                    
+                    isTimerOn = false
+                    loadNextRound(delay: 3)
                 } else {
                     print("false")
                 }
@@ -85,20 +103,6 @@ class ViewController: UIViewController {
         }
     }
 
-    func displayProblem() {
-        let currentRound = bandGameManager.currentRound
-        let currentProblem = gameSets[currentRound]
-        let currentSet = currentProblem.events
-        
-        Label1.text = currentSet[0].title
-        Label2.text = currentSet[1].title
-        Label3.text = currentSet[2].title
-        Label4.text = currentSet[3].title
-
-        // Start the timer
-        
-    }
-    
     // This just rounds all the corners
     func setUpLabels() {
         Label1.layer.cornerRadius = 10
@@ -134,12 +138,111 @@ class ViewController: UIViewController {
         Label3ButtonDown.layer.cornerRadius = 10
         Label3ButtonDown.layer.maskedCorners = [.layerMaxXMaxYCorner]
         Label3ButtonDown.clipsToBounds = true
-
+        
         Label4Button.layer.cornerRadius = 10
         Label4Button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         Label4Button.clipsToBounds = true
     }
     
+    
+    func roundTimer(currentRound: Int, withTimerOf time: Int) {
+        var counter = time
+        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
+        let delay = Int64(NSEC_PER_SEC * UInt64(1))
+        // Calculates a time value to execute the method given current time and delay
+        let dispatchTime = DispatchTime.now() + Double(delay) / Double(NSEC_PER_SEC)
+        
+        // Executes the nextRound method at the dispatch time on the main queue
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+            if self.isTimerOn {
+                // when the counter runs to 0
+                if counter == 0 {
+                    
+                    // if the
+                    if currentRound == self.bandGameManager.currentRound {
+                        
+                        //TODO: Disable the buttons
+                        
+                        self.ShakeToCompleteLabel.text = "You are out of time! Next Question"
+                        self.loadNextRound(delay: 3)
+                        
+                    } else {
+                        print("incorrect round")
+                        // Do nothing, the timer does not apply to this round
+                    }
+                } else {
+                    
+                    if currentRound == self.bandGameManager.currentRound {
+                        counter -= 1
+                        self.timerLabel.text = "\(counter)"
+                        print(counter)
+                        self.roundTimer(currentRound: currentRound, withTimerOf: counter)
+                    } else {
+                        // Do nothing, the timer does not apply to this round
+                        print("incorrect round")
+
+                    }
+                }
+            }
+        }
+    }
+    
+    // Adds delay to the loading of the next round
+    func loadNextRound(delay seconds: Int) {
+        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
+        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
+        // Calculates a time value to execute the method given current time and delay
+        let dispatchTime = DispatchTime.now() + Double(delay) / Double(NSEC_PER_SEC)
+        
+        // Executes the nextRound method at the dispatch time on the main queue
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+            self.nextRound()
+        }
+    }
+    
+    
+//------------------------------------------------
+// MARK: PROBLEM AND ROUND MANIPULATION
+//------------------------------------------------
+    
+    // When called, changes the values of the labels to match the information passed into the Game manager
+    func displayProblem() {
+        let currentRound = bandGameManager.currentRound
+        let currentProblem = gameSets[currentRound]
+        var currentSet = [Event]()
+        currentSet = currentProblem.events
+        
+        print("Current round: \(currentRound) \n \(currentSet)")
+
+        
+        Label1.text = currentSet[0].title
+        Label2.text = currentSet[1].title
+        Label3.text = currentSet[2].title
+        Label4.text = currentSet[3].title
+
+        // Start the timer
+        print("timer started")
+        
+        isTimerOn = true
+        roundTimer(currentRound: currentRound, withTimerOf: 30)
+    }
+    
+    //
+    func nextRound() {
+        bandGameManager.incrementRound()
+        print("Current Round:  \(bandGameManager.currentRound)")
+        
+        if bandGameManager.currentRound == bandGameManager.selectedSets.count {
+            // game is done
+            print("finished")
+            
+        } else {
+            displayProblem()
+
+        }
+    }
+    
+   
     
     @IBAction func buttonsClicked(_ sender: Any) {
         guard let button = sender as? UIButton else {

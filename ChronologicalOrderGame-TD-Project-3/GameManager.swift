@@ -75,7 +75,6 @@ class EventUnarchiver {
                         // Adds this item to the list of items
                         bandInfoItems.append(bandEvent)
                     }
-                    
                 }
                 
                 
@@ -86,6 +85,9 @@ class EventUnarchiver {
                 
                 // Creates a BandItem instance and adds that to the master collection to return
                 bandItem = BandProblem(events: bandInfoItems, bandName: bandName.rawValue)
+                
+                // Reset this array so it dosen't overflow with irrelevent data
+                bandInfoItems = []
                 totalEvents.append(bandItem)
 
             }
@@ -126,10 +128,15 @@ class BandGameManager: GameManager {
                 counter -= 1
             }
         }
+        
+        print(randomNumbers)
                 
         for number in randomNumbers {
+            
+            print("Current set \(sets[number])")
             selectedSets.append(sets[number])
         }
+        print(selectedSets)
     }
     
     
@@ -139,6 +146,10 @@ class BandGameManager: GameManager {
     
     func incrementScore() {
         score += 1
+    }
+    
+    func incrementRound() {
+        currentRound += 1
     }
     
     func checkAnswers(userEvents: [String]) -> Bool{
