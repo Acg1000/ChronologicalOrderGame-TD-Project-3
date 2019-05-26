@@ -23,18 +23,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var Label3ButtonUp: UIButton!
     @IBOutlet weak var Label3ButtonDown: UIButton!
     @IBOutlet weak var Label4Button: UIButton!
+    @IBOutlet weak var nextRoundButton: UIButton!
     
     // Feilds
     @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var ShakeToCompleteLabel: UILabel!
+    @IBOutlet weak var extraInfoLabel: UILabel!
     
     
     let bandGameManager = BandGameManager()
     var gameSets = [Problem]()
     var isTimerOn = false
+    let correctImage = UIImage(named: "next_round_success")
+    let incorrectImage = UIImage(named: "next_round_fail")
 
-    
-    // this is the set that the user creates when they move things around
     
     required init?(coder aDecoder: NSCoder) {
         do {
@@ -74,32 +75,6 @@ class ViewController: UIViewController {
     override var canBecomeFirstResponder: Bool {
         get {
             return true
-        }
-    }
-    
-    // When a device is shook
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-            
-            // collect all the answers and send it to be checked
-            if let event1 = Label1.text, let event2 = Label2.text, let event3 = Label3.text, let event4 = Label4.text {
-                let currentSelection: [String] = [event1, event2, event3, event4]
-                
-                // if the answers are correct then execute the following
-                if bandGameManager.checkAnswers(userEvents: currentSelection) {
-                    bandGameManager.incrementScore()
-                    //TODO: set the label to say correct
-                    print("correct")
-                    
-                    isTimerOn = false
-                    loadNextRound(delay: 3)
-                } else {
-                    print("false")
-                }
-            } else {
-                // some label is not populated
-                //FIXME: This is broken
-            }
         }
     }
 
@@ -145,6 +120,55 @@ class ViewController: UIViewController {
     }
     
     
+//------------------------------------------------
+// MARK: PROBLEM AND ROUND MANIPULATION
+//------------------------------------------------
+    
+    // When called, changes the values of the labels to match the information passed into the Game manager
+    func displayProblem() {
+        let currentRound = bandGameManager.currentRound
+        let currentProblem = gameSets[currentRound]
+        var currentSet = [Event]()
+        currentSet = currentProblem.events
+        extraInfoLabel.text = "Shake to complete"
+        timerLabel.text = "30"
+        
+        print("Current round: \(currentRound) \n \(currentSet)")
+
+        
+        Label1.text = currentSet[0].title
+        Label2.text = currentSet[1].title
+        Label3.text = currentSet[2].title
+        Label4.text = currentSet[3].title
+        
+        nextRoundButton.isHidden = true
+
+
+        // Start the timer
+        print("timer started")
+        
+        isTimerOn = true
+        self.changeButtonState(to: .enabled)
+        roundTimer(currentRound: currentRound, withTimerOf: 30)
+    }
+    
+    
+    func nextRound() {
+        bandGameManager.incrementRound()
+        print("Current Round:  \(bandGameManager.currentRound)")
+        
+        if bandGameManager.currentRound == bandGameManager.selectedSets.count {
+            // game is done
+            print("finished")
+            
+        } else {
+            displayProblem()
+
+        }
+    }
+    
+    
+    // This is the main round timer logic
     func roundTimer(currentRound: Int, withTimerOf time: Int) {
         var counter = time
         // Converts a delay in seconds to nanoseconds as signed 64 bit integer
@@ -162,9 +186,12 @@ class ViewController: UIViewController {
                     if currentRound == self.bandGameManager.currentRound {
                         
                         //TODO: Disable the buttons
+                        self.changeButtonState(to: .disabled)
+                        self.nextRoundButton.isHidden = false
+
+                        self.nextRoundButton.setImage(self.incorrectImage, for: .normal)
                         
-                        self.ShakeToCompleteLabel.text = "You are out of time! Next Question"
-                        self.loadNextRound(delay: 3)
+                        self.extraInfoLabel.text = "Click events for more info"
                         
                     } else {
                         print("incorrect round")
@@ -180,97 +207,15 @@ class ViewController: UIViewController {
                     } else {
                         // Do nothing, the timer does not apply to this round
                         print("incorrect round")
-
+                        
                     }
                 }
             }
         }
     }
-    
-    // Adds delay to the loading of the next round
-    func loadNextRound(delay seconds: Int) {
-        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
-        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
-        // Calculates a time value to execute the method given current time and delay
-        let dispatchTime = DispatchTime.now() + Double(delay) / Double(NSEC_PER_SEC)
-        
-        // Executes the nextRound method at the dispatch time on the main queue
-        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-            self.nextRound()
-        }
-    }
-    
-    
-//------------------------------------------------
-// MARK: PROBLEM AND ROUND MANIPULATION
-//------------------------------------------------
-    
-    // When called, changes the values of the labels to match the information passed into the Game manager
-    func displayProblem() {
-        let currentRound = bandGameManager.currentRound
-        let currentProblem = gameSets[currentRound]
-        var currentSet = [Event]()
-        currentSet = currentProblem.events
-        
-        print("Current round: \(currentRound) \n \(currentSet)")
 
-        
-        Label1.text = currentSet[0].title
-        Label2.text = currentSet[1].title
-        Label3.text = currentSet[2].title
-        Label4.text = currentSet[3].title
-
-        // Start the timer
-        print("timer started")
-        
-        isTimerOn = true
-        roundTimer(currentRound: currentRound, withTimerOf: 30)
-    }
     
-    //
-    func nextRound() {
-        bandGameManager.incrementRound()
-        print("Current Round:  \(bandGameManager.currentRound)")
-        
-        if bandGameManager.currentRound == bandGameManager.selectedSets.count {
-            // game is done
-            print("finished")
-            
-        } else {
-            displayProblem()
-
-        }
-    }
-    
-   
-    
-    @IBAction func buttonsClicked(_ sender: Any) {
-        guard let button = sender as? UIButton else {
-            return
-        }
-        
-        print(button.tag)
-        switch button.tag {
-        case 0: changePosition(position: 0, direction: .down)
-        case 1: changePosition(position: 1, direction: .up)
-        case 2: changePosition(position: 2, direction: .down)
-        case 3: changePosition(position: 3, direction: .up)
-        case 4: changePosition(position: 4, direction: .down)
-        case 5: changePosition(position: 5, direction: .up)
-        default: return
-        }
-//        switch button.tag {
-//        case 0: print("0")
-//        case 1: print("1")
-//        case 2: print("2")
-//        case 3: print("3")
-//        case 4: print("4")
-//        case 5: print("5")
-//        default: return
-//        }
-        
-    }
-    
+    // The logic behind moving the different text around
     func changePosition(position: Int, direction: MovementDirections) {
         switch direction {
         case .up:
@@ -311,6 +256,98 @@ class ViewController: UIViewController {
             case 5: return
             default: return
             }
+        }
+    }
+    
+//------------------------------------------------
+// MARK: ACTION TAKEN OR BUTTON PRESS FUNCTIONS
+//------------------------------------------------
+    
+    @IBAction func buttonsClicked(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        
+        print(button.tag)
+        switch button.tag {
+        case 0: changePosition(position: 0, direction: .down)
+        case 1: changePosition(position: 1, direction: .up)
+        case 2: changePosition(position: 2, direction: .down)
+        case 3: changePosition(position: 3, direction: .up)
+        case 4: changePosition(position: 4, direction: .down)
+        case 5: changePosition(position: 5, direction: .up)
+        default: return
+        }
+    }
+    
+    // When a device is shook trigger the check answer
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+           
+
+            
+            // collect all the answers and send it to be checked
+            if let event1 = Label1.text, let event2 = Label2.text, let event3 = Label3.text, let event4 = Label4.text {
+                let currentSelection: [String] = [event1, event2, event3, event4]
+                
+                // if the answers are correct then execute the following
+                if bandGameManager.checkAnswers(userEvents: currentSelection) {
+                    bandGameManager.incrementScore()
+                    //TODO: set the label to say correct
+                    print("correct")
+                    
+                    isTimerOn = false
+                    nextRoundButton.isHidden = false
+                    nextRoundButton.setImage(correctImage, for: .normal)
+                    extraInfoLabel.text = "Click events for more info"
+
+                    
+                } else {
+                    
+                    nextRoundButton.isHidden = false
+                    nextRoundButton.setImage(incorrectImage, for: .normal)
+                    extraInfoLabel.text = "Click events for more info"
+
+                    print("false")
+                }
+            } else {
+                // some label is not populated
+                //FIXME: This is broken
+            }
+        }
+    }
+    
+    @IBAction func nextRoundPressed(_ sender: Any) {
+        nextRound()
+    }
+    
+    
+    //------------------------------------------------
+    // MARK: MISC OTHER FUNCTIONS
+    //------------------------------------------------
+    enum ButtonStates {
+        case enabled
+        case disabled
+    }
+    
+    
+    func changeButtonState(to state: ButtonStates) {
+        switch state {
+        case .enabled:
+            Label1Button.isEnabled = true
+            Label2ButtonUp.isEnabled = true
+            Label2ButtonDown.isEnabled = true
+            Label3ButtonUp.isEnabled = true
+            Label3ButtonUp.isEnabled = true
+            Label4Button.isEnabled = true
+            
+        case .disabled:
+            Label1Button.isEnabled = false
+            Label2ButtonUp.isEnabled = false
+            Label2ButtonDown.isEnabled = false
+            Label3ButtonUp.isEnabled = false
+            Label3ButtonUp.isEnabled = false
+            Label4Button.isEnabled = false
         }
     }
 }
