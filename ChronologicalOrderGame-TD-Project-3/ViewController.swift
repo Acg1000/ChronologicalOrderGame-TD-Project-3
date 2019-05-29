@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var Label3ButtonDown: UIButton!
     @IBOutlet weak var Label4Button: UIButton!
     @IBOutlet weak var nextRoundButton: UIButton!
+    @IBOutlet weak var finishGameButton: UIButton!
     
     // Feilds
     @IBOutlet weak var timerLabel: UILabel!
@@ -36,6 +37,7 @@ class ViewController: UIViewController {
     var isTimerOn = false
     let correctImage = UIImage(named: "next_round_success")
     let incorrectImage = UIImage(named: "next_round_fail")
+    var isFinished = false
 
     
     required init?(coder aDecoder: NSCoder) {
@@ -118,6 +120,9 @@ class ViewController: UIViewController {
         Label4Button.layer.cornerRadius = 10
         Label4Button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         Label4Button.clipsToBounds = true
+        
+        finishGameButton.isHidden = true
+
     }
     
     
@@ -128,12 +133,9 @@ class ViewController: UIViewController {
     // When called, changes the values of the labels to match the information passed into the Game manager
     func displayProblem() {
         let currentRound = bandGameManager.currentRound
-        currentProblemSet = gameSets[currentRound].events
+        currentProblemSet = gameSets[currentRound - 1].events
         extraInfoLabel.text = "Shake to complete"
         timerLabel.text = "30"
-        
-        print("Current round: \(currentRound) \n \(currentProblemSet)")
-
         
         Label1.text = currentProblemSet[0].title
         Label2.text = currentProblemSet[1].title
@@ -156,14 +158,9 @@ class ViewController: UIViewController {
         bandGameManager.incrementRound()
         print("Current Round:  \(bandGameManager.currentRound)")
         
-        if bandGameManager.currentRound == bandGameManager.selectedSets.count {
-            // game is done
-            print("finished")
-            
-        } else {
-            displayProblem()
+        print("showing problem")
 
-        }
+        displayProblem()
     }
     
     
@@ -288,37 +285,61 @@ class ViewController: UIViewController {
             // collect all the answers and send it to be checked
             if let event1 = Label1.text, let event2 = Label2.text, let event3 = Label3.text, let event4 = Label4.text {
                 let currentSet = [1: event1, 2: event2, 3: event3, 4: event4]
-                                
+                
+                print("This is the current Round: \(bandGameManager.currentRound) ==== This is the sets count: \(bandGameManager.selectedSets.count)")
+                
+                
+                if bandGameManager.currentRound == bandGameManager.selectedSets.count {
+                    isFinished = true
+                }
+                
                 // if the answers are correct then execute the following
                 if bandGameManager.checkAnswers(userEvents: currentSet) {
                     bandGameManager.incrementScore()
-                    //TODO: set the label to say correct
+                
                     print("correct")
-                    
                     isTimerOn = false
-                    nextRoundButton.isHidden = false
-                    nextRoundButton.setImage(correctImage, for: .normal)
                     extraInfoLabel.text = "Click events for more info"
 
                     
+                    if isFinished {
+                        finishGameButton.isHidden = false
+                        finishGameButton.setImage(correctImage, for: .normal)
+                        
+                    } else {
+                        //TODO: set the label to say correct
+                        
+                        nextRoundButton.isHidden = false
+                        nextRoundButton.setImage(correctImage, for: .normal)
+                    }
+
+                    // If its not then excute this
                 } else {
-                    
                     isTimerOn = false
-                    nextRoundButton.isHidden = false
-                    nextRoundButton.setImage(incorrectImage, for: .normal)
                     extraInfoLabel.text = "Click events for more info"
-
-                    print("false")
+                    
+                    
+                    if isFinished {
+                        finishGameButton.isHidden = false
+                        finishGameButton.setImage(incorrectImage, for: .normal)
+                        
+                    } else {
+                        //TODO: set the label to say correct
+                        
+                        nextRoundButton.isHidden = false
+                        nextRoundButton.setImage(incorrectImage, for: .normal)
+                    }
                 }
-            } else {
-                // some label is not populated
-                //FIXME: This is broken
             }
         }
     }
     
     @IBAction func nextRoundPressed(_ sender: Any) {
         nextRound()
+    }
+    
+    @IBAction func finishGamePressed(_ sender: Any) {
+        print("NICE ITS DONE")
     }
     
     

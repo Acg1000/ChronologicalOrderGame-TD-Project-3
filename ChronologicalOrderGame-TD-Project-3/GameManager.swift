@@ -108,7 +108,7 @@ class BandGameManager: GameManager {
     required init() {
         self.rounds = 5
         score = 0
-        currentRound = 0
+        currentRound = 1
         sets = [Problem]()
         selectedSets = [Problem]()
     }
@@ -136,7 +136,6 @@ class BandGameManager: GameManager {
             print("Current set \(sets[number])")
             selectedSets.append(sets[number])
         }
-        print(selectedSets)
     }
     
     
@@ -170,8 +169,7 @@ class BandGameManager: GameManager {
 //            counter += 1
 //        }
         
-        for event in selectedSets[currentRound].events {
-            print("Current Event: \(event)")
+        for event in selectedSets[currentRound - 1].events {
             
             orderedList[event.position] = event.title
 //            print("Event Position: \(event.position) ==== Counter: \(counter)")
@@ -184,49 +182,40 @@ class BandGameManager: GameManager {
             counter += 1
         }
         
+        print("This is the ordered List: \(orderedList)")
         return orderedList
-        print(orderedList[1])
     }
     
     func checkAnswers(userEvents: [Int: String]) -> Bool{
         var counter = 0
+        var eventSorterCounter = 1
         var correctCounter = 0
         var orderedList = getOrderedList()
         print("\(userEvents) \n \(orderedList)")
         
         
         for event in userEvents {
-            //find the first one
-            if event.key == 1 {
-                if orderedList[1] == event.value {
-                    print("EPICCC")
-                    correctCounter += 1
-                }
-            } else if event.key == 2{
-                if orderedList[2] == event.value {
-                    print("EPICCC")
-                    correctCounter += 1
-
-                }
+            
+            eventSorterCounter = 1
+            while eventSorterCounter <= userEvents.count {
                 
-            } else if event.key == 3 {
-                if orderedList[3] == event.value {
-                    print("EPICCC")
-                    correctCounter += 1
-
-                }
-                
-            } else if event.key == 4 {
-                if orderedList[4] == event.value {
-                    print("EPICCC")
-                    correctCounter += 1
-
+                print("KEY: \(event.key) ======== Event Sorter Counter: \(eventSorterCounter)")
+                if event.key == eventSorterCounter {
+                    print("true")
+                    
+                    print("\(orderedList[eventSorterCounter]) ======== \(event.value)")
+                    if orderedList[eventSorterCounter] == event.value {
+                        print("EPICCC")
+                        correctCounter += 1
+                    } else {
+                        print("wrong")
+                    }
+                } else {
+                    
                 }
                 
-            } else {
-                
+                eventSorterCounter += 1
             }
-            //check if it matches the other
             
             counter += 1
         }
