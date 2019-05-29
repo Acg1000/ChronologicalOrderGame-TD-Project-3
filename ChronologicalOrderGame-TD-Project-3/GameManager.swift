@@ -152,17 +152,89 @@ class BandGameManager: GameManager {
         currentRound += 1
     }
     
-    func checkAnswers(userEvents: [String]) -> Bool{
-        let answerCounter = 0
-        for event in userEvents {
-            
-            if event == selectedSets[currentRound].events[answerCounter].title {
-                return true
-            } else {
-                return false
-            }
-        }
-        return false
+    func getOrderedList() -> [Int: String] {
+        var counter = 1
+        var orderedList: [Int: String] = [:]
+//        print("Sets \(sets) \n selected Sets \(selectedSets)")
         
+//        for event in selectedSets {
+//            let eventss = event.events[currentRound]
+//            print("This is the current event \(eventss)")
+//
+//            if eventss.position == counter {
+//                orderedList[counter] = eventss.title
+//                print("This is the ordered list as its built: \(orderedList)")
+//            } else {
+//                print("not found")
+//            }
+//            counter += 1
+//        }
+        
+        for event in selectedSets[currentRound].events {
+            print("Current Event: \(event)")
+            
+            orderedList[event.position] = event.title
+//            print("Event Position: \(event.position) ==== Counter: \(counter)")
+//            if event.position == counter {
+//                print("We got a match!")
+//            } else {
+//                print("nope :(")
+//            }
+            
+            counter += 1
+        }
+        
+        return orderedList
+        print(orderedList[1])
+    }
+    
+    func checkAnswers(userEvents: [Int: String]) -> Bool{
+        var counter = 0
+        var correctCounter = 0
+        var orderedList = getOrderedList()
+        print("\(userEvents) \n \(orderedList)")
+        
+        
+        for event in userEvents {
+            //find the first one
+            if event.key == 1 {
+                if orderedList[1] == event.value {
+                    print("EPICCC")
+                    correctCounter += 1
+                }
+            } else if event.key == 2{
+                if orderedList[2] == event.value {
+                    print("EPICCC")
+                    correctCounter += 1
+
+                }
+                
+            } else if event.key == 3 {
+                if orderedList[3] == event.value {
+                    print("EPICCC")
+                    correctCounter += 1
+
+                }
+                
+            } else if event.key == 4 {
+                if orderedList[4] == event.value {
+                    print("EPICCC")
+                    correctCounter += 1
+
+                }
+                
+            } else {
+                
+            }
+            //check if it matches the other
+            
+            counter += 1
+        }
+        
+        if correctCounter == 4 {
+            return true
+        }
+        
+        return false
     }
 }

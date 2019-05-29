@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     
     let bandGameManager = BandGameManager()
     var gameSets = [Problem]()
+    var currentProblemSet = [Event]()
     var isTimerOn = false
     let correctImage = UIImage(named: "next_round_success")
     let incorrectImage = UIImage(named: "next_round_fail")
@@ -127,19 +128,17 @@ class ViewController: UIViewController {
     // When called, changes the values of the labels to match the information passed into the Game manager
     func displayProblem() {
         let currentRound = bandGameManager.currentRound
-        let currentProblem = gameSets[currentRound]
-        var currentSet = [Event]()
-        currentSet = currentProblem.events
+        currentProblemSet = gameSets[currentRound].events
         extraInfoLabel.text = "Shake to complete"
         timerLabel.text = "30"
         
-        print("Current round: \(currentRound) \n \(currentSet)")
+        print("Current round: \(currentRound) \n \(currentProblemSet)")
 
         
-        Label1.text = currentSet[0].title
-        Label2.text = currentSet[1].title
-        Label3.text = currentSet[2].title
-        Label4.text = currentSet[3].title
+        Label1.text = currentProblemSet[0].title
+        Label2.text = currentProblemSet[1].title
+        Label3.text = currentProblemSet[2].title
+        Label4.text = currentProblemSet[3].title
         
         nextRoundButton.isHidden = true
 
@@ -288,10 +287,10 @@ class ViewController: UIViewController {
             
             // collect all the answers and send it to be checked
             if let event1 = Label1.text, let event2 = Label2.text, let event3 = Label3.text, let event4 = Label4.text {
-                let currentSelection: [String] = [event1, event2, event3, event4]
-                
+                let currentSet = [1: event1, 2: event2, 3: event3, 4: event4]
+                                
                 // if the answers are correct then execute the following
-                if bandGameManager.checkAnswers(userEvents: currentSelection) {
+                if bandGameManager.checkAnswers(userEvents: currentSet) {
                     bandGameManager.incrementScore()
                     //TODO: set the label to say correct
                     print("correct")
@@ -304,6 +303,7 @@ class ViewController: UIViewController {
                     
                 } else {
                     
+                    isTimerOn = false
                     nextRoundButton.isHidden = false
                     nextRoundButton.setImage(incorrectImage, for: .normal)
                     extraInfoLabel.text = "Click events for more info"
@@ -338,7 +338,7 @@ class ViewController: UIViewController {
             Label2ButtonUp.isEnabled = true
             Label2ButtonDown.isEnabled = true
             Label3ButtonUp.isEnabled = true
-            Label3ButtonUp.isEnabled = true
+            Label3ButtonDown.isEnabled = true
             Label4Button.isEnabled = true
             
         case .disabled:
@@ -346,7 +346,7 @@ class ViewController: UIViewController {
             Label2ButtonUp.isEnabled = false
             Label2ButtonDown.isEnabled = false
             Label3ButtonUp.isEnabled = false
-            Label3ButtonUp.isEnabled = false
+            Label3ButtonDown.isEnabled = false
             Label4Button.isEnabled = false
         }
     }
