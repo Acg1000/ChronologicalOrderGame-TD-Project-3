@@ -15,7 +15,7 @@
 		FB4E0448229375F5008876CD /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4E0447229375F5008876CD /* GameManager.swift */; };
 		FB4E044F2294FFFD008876CD /* GameEvents.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB4E044E2294FFFD008876CD /* GameEvents.plist */; };
 		FB4E0453229508D2008876CD /* ProblemCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4E0452229508D2008876CD /* ProblemCollection.swift */; };
-		FB8BDECD229F2EBB00B203BC /* ScoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8BDECC229F2EBB00B203BC /* ScoreController.swift */; };
+		FB8BDED122A1C8D700B203BC /* ScoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8BDED022A1C8D700B203BC /* ScoreController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		FB4E0447229375F5008876CD /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		FB4E044E2294FFFD008876CD /* GameEvents.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GameEvents.plist; sourceTree = "<group>"; };
 		FB4E0452229508D2008876CD /* ProblemCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemCollection.swift; sourceTree = "<group>"; };
-		FB8BDECC229F2EBB00B203BC /* ScoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreController.swift; sourceTree = "<group>"; };
+		FB8BDED022A1C8D700B203BC /* ScoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				FB4E0435229372D8008876CD /* AppDelegate.swift */,
-				FB4E0437229372D8008876CD /* ViewController.swift */,
-				FB8BDECC229F2EBB00B203BC /* ScoreController.swift */,
+				FB8BDED222A1C8EC00B203BC /* ViewControllers */,
 				FB4E0439229372D8008876CD /* Main.storyboard */,
 				FB4E043C229372D9008876CD /* Assets.xcassets */,
 				FB4E043E229372D9008876CD /* LaunchScreen.storyboard */,
@@ -82,6 +81,15 @@
 				FB4E044E2294FFFD008876CD /* GameEvents.plist */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FB8BDED222A1C8EC00B203BC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FB4E0437229372D8008876CD /* ViewController.swift */,
+				FB8BDED022A1C8D700B203BC /* ScoreController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,7 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB8BDECD229F2EBB00B203BC /* ScoreController.swift in Sources */,
+				FB8BDED122A1C8D700B203BC /* ScoreController.swift in Sources */,
 				FB4E0438229372D8008876CD /* ViewController.swift in Sources */,
 				FB4E0448229375F5008876CD /* GameManager.swift in Sources */,
 				FB4E0453229508D2008876CD /* ProblemCollection.swift in Sources */,

@@ -17,6 +17,7 @@ protocol GameManager {
     var rounds: Int { get }
     var currentRound: Int { get set }
     var score: Int { get set }
+    var isFinished: Bool { get set }
     
 //    init(sets: [ChronologicalOrderSet], rounds: Int)
     func generateQuestions(count: Int, upperBound: Int)
@@ -104,6 +105,8 @@ class BandGameManager: GameManager {
     var rounds: Int
     var currentRound: Int
     var score: Int
+    var isFinished: Bool
+
     
     required init() {
         self.rounds = 5
@@ -111,6 +114,7 @@ class BandGameManager: GameManager {
         currentRound = 1
         sets = [Problem]()
         selectedSets = [Problem]()
+        isFinished = false
     }
     
     func generateQuestions(count: Int, upperBound: Int) {
@@ -140,7 +144,8 @@ class BandGameManager: GameManager {
     
     
     func resetGame() {
-        // Clear all the information
+        score = 0
+        currentRound = 1
     }
     
     func incrementScore() {
@@ -201,14 +206,12 @@ class BandGameManager: GameManager {
                 
                 print("KEY: \(event.key) ======== Event Sorter Counter: \(eventSorterCounter)")
                 if event.key == eventSorterCounter {
-                    print("true")
                     
-                    print("\(orderedList[eventSorterCounter]) ======== \(event.value)")
                     if orderedList[eventSorterCounter] == event.value {
-                        print("EPICCC")
+                        print("Match")
                         correctCounter += 1
                     } else {
-                        print("wrong")
+                        //FIXME: Add a thing here
                     }
                 } else {
                     

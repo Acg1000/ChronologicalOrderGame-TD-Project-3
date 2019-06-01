@@ -29,6 +29,8 @@ class ViewController: UIViewController {
     // Feilds
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var extraInfoLabel: UILabel!
+    @IBOutlet weak var scoreField: UILabel!
+    @IBOutlet weak var objectName: UILabel!
     
     
     let bandGameManager = BandGameManager()
@@ -38,6 +40,8 @@ class ViewController: UIViewController {
     let correctImage = UIImage(named: "next_round_success")
     let incorrectImage = UIImage(named: "next_round_fail")
     var isFinished = false
+    var finalScore = ""
+    var wasShook = false
 
     
     required init?(coder aDecoder: NSCoder) {
@@ -59,6 +63,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         gameSets = bandGameManager.selectedSets
         setUpLabels()
@@ -141,6 +146,7 @@ class ViewController: UIViewController {
         Label2.text = currentProblemSet[1].title
         Label3.text = currentProblemSet[2].title
         Label4.text = currentProblemSet[3].title
+        objectName.text = gameSets[currentRound-1].bandName
         
         nextRoundButton.isHidden = true
 
@@ -255,6 +261,15 @@ class ViewController: UIViewController {
         }
     }
     
+    func resetGame() {
+        setUpLabels()
+        bandGameManager.resetGame()
+        finishGameButton.isHidden = true
+        isFinished = false
+        
+        displayProblem()
+    }
+    
 //------------------------------------------------
 // MARK: ACTION TAKEN OR BUTTON PRESS FUNCTIONS
 //------------------------------------------------
@@ -278,15 +293,17 @@ class ViewController: UIViewController {
     
     // When a device is shook trigger the check answer
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-           
-
+        if motion == .motionShake && wasShook == false {
+            
+            changeButtonState(to: .disabled)
             
             // collect all the answers and send it to be checked
             if let event1 = Label1.text, let event2 = Label2.text, let event3 = Label3.text, let event4 = Label4.text {
                 let currentSet = [1: event1, 2: event2, 3: event3, 4: event4]
                 
                 print("This is the current Round: \(bandGameManager.currentRound) ==== This is the sets count: \(bandGameManager.selectedSets.count)")
+                
+                wasShook = true
                 
                 
                 if bandGameManager.currentRound == bandGameManager.selectedSets.count {
@@ -335,14 +352,30 @@ class ViewController: UIViewController {
     }
     
     @IBAction func nextRoundPressed(_ sender: Any) {
+        wasShook = false
         nextRound()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var DestViewController: ScoreController = segue.destination as! ScoreController
+        //FIXME: this is gonna break
+        
+        DestViewController.labelText = "\(bandGameManager.score) / \(bandGameManager.sets.count)"
     }
     
     @IBAction func finishGamePressed(_ sender: Any) {
         print("NICE ITS DONE")
+        
+        self.performSegue(withIdentifier: "showScore", sender: nil)
+        
+//        resetGame()
+//        scoreField.text = "\(bandGameManager.score) / \(bandGameManager.sets.count)"
+        
     }
     
-    
+    @IBAction func dismissScore(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     //------------------------------------------------
     // MARK: MISC OTHER FUNCTIONS
     //------------------------------------------------

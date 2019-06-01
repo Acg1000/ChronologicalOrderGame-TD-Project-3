@@ -4,21 +4,21 @@
 <dict>
 	<key>coldplay</key>
 	<dict>
-		<key>Released Song &quot;Yellow&quot;</key>
+		<key>Was founded</key>
 		<dict>
 			<key>position</key>
 			<integer>1</integer>
 			<key>url</key>
 			<string></string>
 		</dict>
-		<key>Released Song &quot;Viva La Vida&quot;</key>
+		<key>Released Song &quot;Yellow&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>2</integer>
 			<key>url</key>
 			<string></string>
 		</dict>
-		<key>random fact</key>
+		<key>Released Song &quot;Viva La Vida&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>3</integer>
@@ -35,21 +35,21 @@
 	</dict>
 	<key>radiohead</key>
 	<dict>
-		<key>Released Song &quot;Creep&quot;</key>
+		<key>Was Founded</key>
 		<dict>
 			<key>position</key>
 			<integer>1</integer>
 			<key>url</key>
 			<string></string>
 		</dict>
-		<key>Released Albulm &quot;Ok Computer&quot;</key>
+		<key>Released Song &quot;Creep&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>2</integer>
 			<key>url</key>
 			<string></string>
 		</dict>
-		<key>random fact</key>
+		<key>Released Albulm &quot;Ok Computer&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>3</integer>
@@ -66,7 +66,7 @@
 	</dict>
 	<key>muse</key>
 	<dict>
-		<key>random fact</key>
+		<key>Band was founded</key>
 		<dict>
 			<key>position</key>
 			<integer>1</integer>
