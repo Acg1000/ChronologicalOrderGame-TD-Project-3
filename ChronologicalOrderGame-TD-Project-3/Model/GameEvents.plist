@@ -9,28 +9,28 @@
 			<key>position</key>
 			<integer>1</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Coldplay</string>
 		</dict>
 		<key>Released Song &quot;Yellow&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>2</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Coldplay</string>
 		</dict>
-		<key>Released Song &quot;Viva La Vida&quot;</key>
+		<key>Released Albulm &quot;A Rush Of Blood To The Head&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>3</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Coldplay</string>
 		</dict>
 		<key>Played the Super Bowl Halftime Show</key>
 		<dict>
 			<key>position</key>
 			<integer>4</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Coldplay</string>
 		</dict>
 	</dict>
 	<key>radiohead</key>
@@ -40,28 +40,28 @@
 			<key>position</key>
 			<integer>1</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Radiohead</string>
 		</dict>
 		<key>Released Song &quot;Creep&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>2</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Radiohead</string>
 		</dict>
 		<key>Released Albulm &quot;Ok Computer&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>3</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Radiohead</string>
 		</dict>
 		<key>Inducted into the Rock &amp; Roll Hall of Fame</key>
 		<dict>
 			<key>position</key>
 			<integer>4</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Radiohead</string>
 		</dict>
 	</dict>
 	<key>muse</key>
@@ -71,28 +71,28 @@
 			<key>position</key>
 			<integer>1</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Muse_(band)</string>
 		</dict>
 		<key>Released Song &quot;Starlight&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>2</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Black_Holes_and_Revelations</string>
 		</dict>
 		<key>Released Song &quot;Uprising&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>3</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/The_Resistance_(album)</string>
 		</dict>
 		<key>Played at the London Olympics</key>
 		<dict>
 			<key>position</key>
 			<integer>4</integer>
 			<key>url</key>
-			<string></string>
+			<string>https://en.wikipedia.org/wiki/Exogenesis:_Symphony#Live_performances</string>
 		</dict>
 	</dict>
 </dict>

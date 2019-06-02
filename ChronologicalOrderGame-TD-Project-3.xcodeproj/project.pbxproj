@@ -16,6 +16,8 @@
 		FB4E044F2294FFFD008876CD /* GameEvents.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB4E044E2294FFFD008876CD /* GameEvents.plist */; };
 		FB4E0453229508D2008876CD /* ProblemCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4E0452229508D2008876CD /* ProblemCollection.swift */; };
 		FB8BDED122A1C8D700B203BC /* ScoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8BDED022A1C8D700B203BC /* ScoreController.swift */; };
+		FB8BDED422A229EF00B203BC /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8BDED322A229EF00B203BC /* WebViewController.swift */; };
+		FB8BDED722A44C0100B203BC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8BDED622A44C0100B203BC /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		FB4E044E2294FFFD008876CD /* GameEvents.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GameEvents.plist; sourceTree = "<group>"; };
 		FB4E0452229508D2008876CD /* ProblemCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemCollection.swift; sourceTree = "<group>"; };
 		FB8BDED022A1C8D700B203BC /* ScoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreController.swift; sourceTree = "<group>"; };
+		FB8BDED322A229EF00B203BC /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		FB8BDED622A44C0100B203BC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB8BDED722A44C0100B203BC /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +53,7 @@
 			children = (
 				FB4E0434229372D8008876CD /* ChronologicalOrderGame-TD-Project-3 */,
 				FB4E0433229372D8008876CD /* Products */,
+				FB8BDED522A44C0100B203BC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,8 +94,17 @@
 			children = (
 				FB4E0437229372D8008876CD /* ViewController.swift */,
 				FB8BDED022A1C8D700B203BC /* ScoreController.swift */,
+				FB8BDED322A229EF00B203BC /* WebViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FB8BDED522A44C0100B203BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB8BDED622A44C0100B203BC /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB8BDED122A1C8D700B203BC /* ScoreController.swift in Sources */,
+				FB8BDED422A229EF00B203BC /* WebViewController.swift in Sources */,
 				FB4E0438229372D8008876CD /* ViewController.swift in Sources */,
 				FB4E0448229375F5008876CD /* GameManager.swift in Sources */,
 				FB4E0453229508D2008876CD /* ProblemCollection.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  ScoreController.swift
+//  WebViewController.swift
 //  ChronologicalOrderGame-TD-Project-3
 //
 //  Created by Andrew Graves on 5/31/19.
@@ -7,29 +7,29 @@
 //
 
 import UIKit
+import WebKit
 
-class ScoreController: UIViewController {
+class WebViewController: UIViewController, WKUIDelegate {
 
-    @IBOutlet weak var scoreLabel: UILabel!
+//    var webView: WKWebView!
     
-    var labelText = String()
+    @IBOutlet weak var webView: WKWebView!
+    var url: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let myURL = URL(string: url)
+        let myRequest = URLRequest(url: myURL!)
+        self.webView.load(myRequest)
 
-        scoreLabel.text = labelText
         // Do any additional setup after loading the view.
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        var DestViewController: ViewController = segue.destination as! ViewController
-//        //FIXME: this is gonna break
-//
-//    }
-    
-    @IBAction func playAgainPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: "showGame", sender: nil)
+    @IBAction func dismissButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
+    
     
     /*
     // MARK: - Navigation
