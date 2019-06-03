@@ -41,6 +41,7 @@ class ViewController: UIViewController {
     let fullPressedUpButton = UIImage(named: "down_full_selected")
     let halfPressedUpButton = UIImage(named: "up_half_selected")
     let halfPressedDownButton = UIImage(named: "down_half_selected")
+    let cornerRadius: CGFloat = 10
     
     var isFinished = false
     var finalScore = ""
@@ -105,61 +106,61 @@ class ViewController: UIViewController {
         tapGesture4.numberOfTapsRequired = 1
         
         // Label 1 Setup
-        Label1.layer.cornerRadius = 10
+        Label1.layer.cornerRadius = cornerRadius
         Label1.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         Label1.clipsToBounds = true
         Label1.isUserInteractionEnabled = false
         Label1.addGestureRecognizer(tapGesture1)
         
         // Label 2 Setup
-        Label2.layer.cornerRadius = 10
+        Label2.layer.cornerRadius = cornerRadius
         Label2.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         Label2.clipsToBounds = true
         Label2.isUserInteractionEnabled = false
         Label2.addGestureRecognizer(tapGesture2)
         
         // Label 3 Setup
-        Label3.layer.cornerRadius = 10
+        Label3.layer.cornerRadius = cornerRadius
         Label3.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         Label3.clipsToBounds = true
         Label3.isUserInteractionEnabled = false
         Label3.addGestureRecognizer(tapGesture3)
         
         // Label 4 Setup
-        Label4.layer.cornerRadius = 10
+        Label4.layer.cornerRadius = cornerRadius
         Label4.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         Label4.clipsToBounds = true
         Label4.isUserInteractionEnabled = false
         Label4.addGestureRecognizer(tapGesture4)
         
         // Label 1 Button Setup
-        Label1Button.layer.cornerRadius = 10
+        Label1Button.layer.cornerRadius = cornerRadius
         Label1Button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         Label1Button.clipsToBounds = true
         Label1Button.setImage(fullPressedUpButton, for: .highlighted)
         
         // Label 2 Button Setup
-        Label2ButtonUp.layer.cornerRadius = 10
+        Label2ButtonUp.layer.cornerRadius = cornerRadius
         Label2ButtonUp.layer.maskedCorners = [.layerMaxXMinYCorner]
         Label2ButtonUp.clipsToBounds = true
         Label2ButtonUp.setImage(halfPressedUpButton, for: .highlighted)
-        Label2ButtonDown.layer.cornerRadius = 10
+        Label2ButtonDown.layer.cornerRadius = cornerRadius
         Label2ButtonDown.layer.maskedCorners = [.layerMaxXMaxYCorner]
         Label2ButtonDown.clipsToBounds = true
         Label2ButtonDown.setImage(halfPressedDownButton, for: .highlighted)
         
         // Label 3 Button Setup
-        Label3ButtonUp.layer.cornerRadius = 10
+        Label3ButtonUp.layer.cornerRadius = cornerRadius
         Label3ButtonUp.layer.maskedCorners = [.layerMaxXMinYCorner]
         Label3ButtonUp.clipsToBounds = true
         Label3ButtonUp.setImage(halfPressedUpButton, for: .highlighted)
-        Label3ButtonDown.layer.cornerRadius = 10
+        Label3ButtonDown.layer.cornerRadius = cornerRadius
         Label3ButtonDown.layer.maskedCorners = [.layerMaxXMaxYCorner]
         Label3ButtonDown.clipsToBounds = true
         Label3ButtonDown.setImage(halfPressedDownButton, for: .highlighted)
 
         // Label 4 Button Setup
-        Label4Button.layer.cornerRadius = 10
+        Label4Button.layer.cornerRadius = cornerRadius
         Label4Button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         Label4Button.clipsToBounds = true
         Label4Button.setImage(fullPressedDownButton, for: .highlighted)
