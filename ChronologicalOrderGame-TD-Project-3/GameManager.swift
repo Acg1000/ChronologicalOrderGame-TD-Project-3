@@ -19,7 +19,6 @@ protocol GameManager {
     var score: Int { get set }
     var isFinished: Bool { get set }
     
-//    init(sets: [ChronologicalOrderSet], rounds: Int)
     func generateQuestions(count: Int, upperBound: Int)
     func resetGame()
     func incrementScore()
@@ -27,7 +26,7 @@ protocol GameManager {
 }
 
 
-// MARK: enum for tracking errors with PList conversion
+// enum for tracking errors with PList conversion
 
 enum EventError: Error {
     case invalidResource
@@ -98,6 +97,9 @@ class EventUnarchiver {
     }
 }
 
+//------------------------------------------------
+// MARK: BANDGAMEMANAGER CLASS
+//------------------------------------------------
 
 class BandGameManager: GameManager {
     var sets: [Problem]
@@ -117,6 +119,7 @@ class BandGameManager: GameManager {
         isFinished = false
     }
     
+    // when called generates questions based on how many are wanted
     func generateQuestions(count: Int, upperBound: Int) {
         var randomNumber: Int
         var randomNumbers = [Int]()
@@ -133,100 +136,80 @@ class BandGameManager: GameManager {
             }
         }
         
-        print(randomNumbers)
-                
+        // for every number in the random number collection
         for number in randomNumbers {
             
-            print("Current set \(sets[number])")
+            // add a value corresponding to that random number
             selectedSets.append(sets[number])
         }
     }
     
-    
+    // When the game is reset set the score to 0 and the current round to 1
     func resetGame() {
         score = 0
         currentRound = 1
     }
     
+    // adds one to the current score
     func incrementScore() {
         score += 1
     }
     
+    // adds one to the current round
     func incrementRound() {
         currentRound += 1
     }
     
+    // gets an ordered list of events
     func getOrderedList() -> [Int: String] {
         var counter = 1
         var orderedList: [Int: String] = [:]
-//        print("Sets \(sets) \n selected Sets \(selectedSets)")
-        
-//        for event in selectedSets {
-//            let eventss = event.events[currentRound]
-//            print("This is the current event \(eventss)")
-//
-//            if eventss.position == counter {
-//                orderedList[counter] = eventss.title
-//                print("This is the ordered list as its built: \(orderedList)")
-//            } else {
-//                print("not found")
-//            }
-//            counter += 1
-//        }
         
         for event in selectedSets[currentRound - 1].events {
             
             orderedList[event.position] = event.title
-//            print("Event Position: \(event.position) ==== Counter: \(counter)")
-//            if event.position == counter {
-//                print("We got a match!")
-//            } else {
-//                print("nope :(")
-//            }
             
             counter += 1
         }
         
-        print("This is the ordered List: \(orderedList)")
         return orderedList
     }
     
+    // compares the answers provided with an ordered list of answers
     func checkAnswers(userEvents: [Int: String]) -> Bool{
-        var counter = 0
         var eventSorterCounter = 1
         var correctCounter = 0
         var orderedList = getOrderedList()
-        print("\(userEvents) \n \(orderedList)")
         
-        
+        // for every event in the dictionary provided by the user
         for event in userEvents {
             
             eventSorterCounter = 1
+            
+            // while the counter is <= the amount of events in the dictionary
             while eventSorterCounter <= userEvents.count {
                 
-                print("KEY: \(event.key) ======== Event Sorter Counter: \(eventSorterCounter)")
-                if event.key == eventSorterCounter {
+                // If the events key (the number) is = to the counter
+                if event.key == eventSorterCounter && orderedList[eventSorterCounter] == event.value {
                     
-                    if orderedList[eventSorterCounter] == event.value {
-                        print("Match")
-                        correctCounter += 1
-                    } else {
-                        //FIXME: Add a thing here
-                    }
-                } else {
+                    // print match and add one to the correct counter
+                    print("Match")
+                    correctCounter += 1
                     
                 }
                 
                 eventSorterCounter += 1
             }
+        }
+        
+        // if the correct counter is = to the amount of events...
+        if correctCounter == userEvents.count {
             
-            counter += 1
-        }
-        
-        if correctCounter == 4 {
+            // This function returns true
             return true
+        } else {
+            
+            return false
         }
-        
-        return false
     }
 }

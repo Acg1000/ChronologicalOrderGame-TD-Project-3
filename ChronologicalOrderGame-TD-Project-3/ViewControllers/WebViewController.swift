@@ -10,8 +10,6 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController, WKUIDelegate {
-
-//    var webView: WKWebView!
     
     @IBOutlet weak var webView: WKWebView!
     var url: String = ""
@@ -26,19 +24,10 @@ class WebViewController: UIViewController, WKUIDelegate {
         // Do any additional setup after loading the view.
     }
     
+    // When the button is pressed
     @IBAction func dismissButtonPressed(_ sender: Any) {
+        
+        // dismiss the webview popup
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

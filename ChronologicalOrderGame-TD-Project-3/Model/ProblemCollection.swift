@@ -9,9 +9,13 @@
 import Foundation
 
 enum BandNames: String {
-    case coldplay
-    case muse
-    case radiohead
+    case Coldplay
+    case Muse
+    case Radiohead
+    case Queen
+    case Keane
+    case ArcticMonkeys
+    case Joji
 }
 
 //protocol EventItem {

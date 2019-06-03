@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var Label2: UILabel!
     @IBOutlet weak var Label3: UILabel!
     @IBOutlet weak var Label4: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var extraInfoLabel: UILabel!
+    @IBOutlet weak var objectName: UILabel!
     
     // Buttons
     @IBOutlet weak var Label1Button: UIButton!
@@ -26,10 +29,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var nextRoundButton: UIButton!
     @IBOutlet weak var finishGameButton: UIButton!
     
-    // Feilds
-    @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var extraInfoLabel: UILabel!
-    @IBOutlet weak var objectName: UILabel!
     
     
     let bandGameManager = BandGameManager()
@@ -53,12 +52,13 @@ class ViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         do {
             let dictionary = try PlistConverter.dictonary(fromFile: "GameEvents", ofType: "plist")
+            
             let eventsCollection = try EventUnarchiver.events(fromDictionary: dictionary)
 
             
             // Fills the sets with the data in the spreadsheet
             bandGameManager.sets = eventsCollection
-            bandGameManager.generateQuestions(count: 3, upperBound: 3)
+            bandGameManager.generateQuestions(count: bandGameManager.sets.count, upperBound: bandGameManager.sets.count)
             
         } catch let error {
             fatalError("\(error)")
@@ -84,7 +84,7 @@ class ViewController: UIViewController {
     //------------------------------------------------
     
     
-    // These next two things just allow for use of the device's motion sensors
+    // This just allows for the motion sensor to work
     
     override var canBecomeFirstResponder: Bool {
         get {
@@ -104,93 +104,71 @@ class ViewController: UIViewController {
         tapGesture3.numberOfTapsRequired = 1
         tapGesture4.numberOfTapsRequired = 1
         
+        // Label 1 Setup
         Label1.layer.cornerRadius = 10
+        Label1.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         Label1.clipsToBounds = true
         Label1.isUserInteractionEnabled = false
         Label1.addGestureRecognizer(tapGesture1)
         
+        // Label 2 Setup
         Label2.layer.cornerRadius = 10
+        Label2.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         Label2.clipsToBounds = true
         Label2.isUserInteractionEnabled = false
         Label2.addGestureRecognizer(tapGesture2)
         
+        // Label 3 Setup
         Label3.layer.cornerRadius = 10
+        Label3.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         Label3.clipsToBounds = true
         Label3.isUserInteractionEnabled = false
         Label3.addGestureRecognizer(tapGesture3)
         
+        // Label 4 Setup
         Label4.layer.cornerRadius = 10
+        Label4.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         Label4.clipsToBounds = true
         Label4.isUserInteractionEnabled = false
         Label4.addGestureRecognizer(tapGesture4)
         
-        
-        
+        // Label 1 Button Setup
         Label1Button.layer.cornerRadius = 10
         Label1Button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         Label1Button.clipsToBounds = true
         Label1Button.setImage(fullPressedUpButton, for: .highlighted)
         
+        // Label 2 Button Setup
         Label2ButtonUp.layer.cornerRadius = 10
         Label2ButtonUp.layer.maskedCorners = [.layerMaxXMinYCorner]
         Label2ButtonUp.clipsToBounds = true
         Label2ButtonUp.setImage(halfPressedUpButton, for: .highlighted)
-        
         Label2ButtonDown.layer.cornerRadius = 10
         Label2ButtonDown.layer.maskedCorners = [.layerMaxXMaxYCorner]
         Label2ButtonDown.clipsToBounds = true
         Label2ButtonDown.setImage(halfPressedDownButton, for: .highlighted)
         
+        // Label 3 Button Setup
         Label3ButtonUp.layer.cornerRadius = 10
         Label3ButtonUp.layer.maskedCorners = [.layerMaxXMinYCorner]
         Label3ButtonUp.clipsToBounds = true
         Label3ButtonUp.setImage(halfPressedUpButton, for: .highlighted)
-
         Label3ButtonDown.layer.cornerRadius = 10
         Label3ButtonDown.layer.maskedCorners = [.layerMaxXMaxYCorner]
         Label3ButtonDown.clipsToBounds = true
         Label3ButtonDown.setImage(halfPressedDownButton, for: .highlighted)
 
+        // Label 4 Button Setup
         Label4Button.layer.cornerRadius = 10
         Label4Button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         Label4Button.clipsToBounds = true
         Label4Button.setImage(fullPressedDownButton, for: .highlighted)
 
+        // Sets up the button at the end of the game
         finishGameButton.isHidden = true
 
     }
     
-    @objc func label1Clicked() {
-        print("Label1 was clicked \(currentProblemSet[0].title)")
-        urlClicked = true
-        labelPosition = 0
-        
-        performSegue(withIdentifier: "showWebView", sender: nil)
-    }
-    
-    @objc func label2Clicked() {
-        print("Label2 was clicked \(currentProblemSet[1].title)")
-        urlClicked = true
-        labelPosition = 1
-
-        performSegue(withIdentifier: "showWebView", sender: nil)
-    }
-    
-    @objc func label3Clicked() {
-        print("Label3 was clicked \(currentProblemSet[2].title)")
-        urlClicked = true
-        labelPosition = 2
-
-        performSegue(withIdentifier: "showWebView", sender: nil)
-    }
-    
-    @objc func label4Clicked() {
-        print("Label4 was clicked \(currentProblemSet[3].title)")
-        urlClicked = true
-        labelPosition = 3
-
-        performSegue(withIdentifier: "showWebView", sender: nil)
-    }
     
     
 //------------------------------------------------
@@ -202,32 +180,35 @@ class ViewController: UIViewController {
         let currentRound = bandGameManager.currentRound
         currentProblemSet = gameSets[currentRound - 1].events
         extraInfoLabel.text = "Shake to complete"
-        timerLabel.text = "30"
+        timerLabel.text = "60"
         
+        // Takes the data and passes it into the labels for display
         Label1.text = currentProblemSet[0].title
         Label2.text = currentProblemSet[1].title
         Label3.text = currentProblemSet[2].title
         Label4.text = currentProblemSet[3].title
-        objectName.text = gameSets[currentRound-1].bandName
         
+        // Displays the band name above the labels
+        objectName.text = gameSets[currentRound - 1].bandName
+        
+        // hides the next round button
         nextRoundButton.isHidden = true
-
 
         // Start the timer
         print("timer started")
         
+        // Sets the timer to on, enables the buttons and starts the round timer
         isTimerOn = true
         self.changeButtonState(to: .enabled)
-        roundTimer(currentRound: currentRound, withTimerOf: 30)
+        roundTimer(currentRound: currentRound, withTimerOf: 60)
     }
     
-    
+    // Handles the next round logic
     func nextRound() {
+        // adds one to the round count
         bandGameManager.incrementRound()
-        print("Current Round:  \(bandGameManager.currentRound)")
-        
-        print("showing problem")
 
+        // calls the display problem func
         displayProblem()
     }
     
@@ -235,39 +216,52 @@ class ViewController: UIViewController {
     // This is the main round timer logic
     func roundTimer(currentRound: Int, withTimerOf time: Int) {
         var counter = time
+        
         // Converts a delay in seconds to nanoseconds as signed 64 bit integer
         let delay = Int64(NSEC_PER_SEC * UInt64(1))
+        
         // Calculates a time value to execute the method given current time and delay
         let dispatchTime = DispatchTime.now() + Double(delay) / Double(NSEC_PER_SEC)
         
         // Executes the nextRound method at the dispatch time on the main queue
         DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
             if self.isTimerOn {
+                
                 // when the counter runs to 0
                 if counter == 0 {
                     
-                    // if the
+                    // if the current round is == to the round when the timer was started
                     if currentRound == self.bandGameManager.currentRound {
                         
                         //TODO: Disable the buttons
                         self.changeButtonState(to: .disabled)
                         self.nextRoundButton.isHidden = false
 
+                        // Set the button to the incorrect image
                         self.nextRoundButton.setImage(self.incorrectImage, for: .normal)
                         
+                        // Changes the label at the bottom
                         self.extraInfoLabel.text = "Click events for more info"
                         
                     } else {
-                        print("incorrect round")
                         // Do nothing, the timer does not apply to this round
                     }
+                    
+                // If the counter is not 0
                 } else {
                     
+                    // if the current round is == to the round when the timer was started
                     if currentRound == self.bandGameManager.currentRound {
+                        
+                        // subtract 1 from the counter
                         counter -= 1
+                        
+                        // Update the timer label to reflect this new value
                         self.timerLabel.text = "\(counter)"
-                        print(counter)
+                        
+                        // Calls this function again with a timer value that is one less then it used to be
                         self.roundTimer(currentRound: currentRound, withTimerOf: counter)
+                        
                     } else {
                         // Do nothing, the timer does not apply to this round
                         print("incorrect round")
@@ -281,15 +275,20 @@ class ViewController: UIViewController {
     
     // The logic behind moving the different text around
     func changePosition(position: Int, direction: MovementDirections) {
+        // Switches on the direction provided, either up or down
         switch direction {
+            
+        // if its .up
         case .up:
             switch position {
             case 0: return
             case 1:
+                // move what was on the top one below visually
                 let topText = Label1.text
                 Label1.text = Label2.text
                 Label2.text = topText
                 
+                // Also updates the data
                 updateCurrentEventsUp(topEvent: 0)
             case 2: return
             case 3:
@@ -309,6 +308,8 @@ class ViewController: UIViewController {
 
             default: return
             }
+            
+        // If its .down
         case .down:
             switch position {
             case 0:
@@ -337,18 +338,21 @@ class ViewController: UIViewController {
         }
     }
     
+    // Called when an item it is moving up
     func updateCurrentEventsUp(topEvent: Int) {
         let firstEvent = currentProblemSet[topEvent]
         currentProblemSet[topEvent] = currentProblemSet[topEvent + 1]
         currentProblemSet[topEvent + 1] = firstEvent
     }
     
+    // Called when an item it is moving down
     func updateCurrentEventsDown(bottomEvent: Int) {
         let lastEvent = currentProblemSet[bottomEvent]
         currentProblemSet[bottomEvent] = currentProblemSet[bottomEvent - 1]
         currentProblemSet[bottomEvent - 1] = lastEvent
     }
     
+    // reset game functionality
     func resetGame() {
         setUpLabels()
         bandGameManager.resetGame()
@@ -362,12 +366,13 @@ class ViewController: UIViewController {
 // MARK: ACTION TAKEN OR BUTTON PRESS FUNCTIONS
 //------------------------------------------------
     
+    // Functionality for the arrow buttons being clicked
     @IBAction func buttonsClicked(_ sender: Any) {
         guard let button = sender as? UIButton else {
             return
         }
         
-        print(button.tag)
+        // Depending on the tag of the button, it has a different position and direction
         switch button.tag {
         case 0: changePosition(position: 0, direction: .down)
         case 1: changePosition(position: 1, direction: .up)
@@ -443,47 +448,82 @@ class ViewController: UIViewController {
         }
     }
     
+    // When the label text is clicked carry out the following functions
+    @objc func label1Clicked() {
+        print("Label1 was clicked \(currentProblemSet[0].title)")
+        urlClicked = true
+        labelPosition = 0
+        
+        performSegue(withIdentifier: "showWebView", sender: nil)
+    }
+    
+    @objc func label2Clicked() {
+        print("Label2 was clicked \(currentProblemSet[1].title)")
+        urlClicked = true
+        labelPosition = 1
+        
+        performSegue(withIdentifier: "showWebView", sender: nil)
+    }
+    
+    @objc func label3Clicked() {
+        print("Label3 was clicked \(currentProblemSet[2].title)")
+        urlClicked = true
+        labelPosition = 2
+        
+        performSegue(withIdentifier: "showWebView", sender: nil)
+    }
+    
+    @objc func label4Clicked() {
+        print("Label4 was clicked \(currentProblemSet[3].title)")
+        urlClicked = true
+        labelPosition = 3
+        
+        performSegue(withIdentifier: "showWebView", sender: nil)
+    }
+    
+    
+    
+    // When the next round pressed button is pressed...
     @IBAction func nextRoundPressed(_ sender: Any) {
         wasShook = false
         nextRound()
     }
     
+    
+    // some logic for determining which view to switch to
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if urlClicked {
-            var DestViewController: WebViewController = segue.destination as! WebViewController
+            let DestViewController: WebViewController = segue.destination as! WebViewController
             DestViewController.url = currentProblemSet[labelPosition].url
             
             urlClicked = false
         } else {
-            var DestViewController: ScoreController = segue.destination as! ScoreController
+            let DestViewController: ScoreController = segue.destination as! ScoreController
             DestViewController.labelText = "\(bandGameManager.score) / \(bandGameManager.sets.count)"
             
         }
     }
     
+    
+    // When the finished game button is pressed
     @IBAction func finishGamePressed(_ sender: Any) {
-        print("NICE ITS DONE")
         
         performSegue(withIdentifier: "showScore", sender: nil)
         
-//        resetGame()
-//        scoreField.text = "\(bandGameManager.score) / \(bandGameManager.sets.count)"
-        
     }
     
-    @IBAction func dismissScore(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
     //------------------------------------------------
     // MARK: MISC OTHER FUNCTIONS
     //------------------------------------------------
+    
+    // an enum for the two different button states
     enum ButtonStates {
         case enabled
         case disabled
     }
     
-    
+    // A function to deal with changes in button states from enabled to disabled
     func changeButtonState(to state: ButtonStates) {
         switch state {
         case .enabled:

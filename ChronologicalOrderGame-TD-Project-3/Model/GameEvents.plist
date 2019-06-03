@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>coldplay</key>
+	<key>Coldplay</key>
 	<dict>
 		<key>Was founded</key>
 		<dict>
@@ -11,14 +11,14 @@
 			<key>url</key>
 			<string>https://en.wikipedia.org/wiki/Coldplay</string>
 		</dict>
-		<key>Released Song &quot;Yellow&quot;</key>
+		<key>Released song &quot;Yellow&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>2</integer>
 			<key>url</key>
 			<string>https://en.wikipedia.org/wiki/Coldplay</string>
 		</dict>
-		<key>Released Albulm &quot;A Rush Of Blood To The Head&quot;</key>
+		<key>Released album &quot;A Rush Of Blood To The Head&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>3</integer>
@@ -33,7 +33,7 @@
 			<string>https://en.wikipedia.org/wiki/Coldplay</string>
 		</dict>
 	</dict>
-	<key>radiohead</key>
+	<key>Radiohead</key>
 	<dict>
 		<key>Was Founded</key>
 		<dict>
@@ -42,14 +42,14 @@
 			<key>url</key>
 			<string>https://en.wikipedia.org/wiki/Radiohead</string>
 		</dict>
-		<key>Released Song &quot;Creep&quot;</key>
+		<key>Released song &quot;Creep&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>2</integer>
 			<key>url</key>
 			<string>https://en.wikipedia.org/wiki/Radiohead</string>
 		</dict>
-		<key>Released Albulm &quot;Ok Computer&quot;</key>
+		<key>Released album &quot;Ok Computer&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>3</integer>
@@ -64,7 +64,7 @@
 			<string>https://en.wikipedia.org/wiki/Radiohead</string>
 		</dict>
 	</dict>
-	<key>muse</key>
+	<key>Muse</key>
 	<dict>
 		<key>Band was founded</key>
 		<dict>
@@ -73,14 +73,14 @@
 			<key>url</key>
 			<string>https://en.wikipedia.org/wiki/Muse_(band)</string>
 		</dict>
-		<key>Released Song &quot;Starlight&quot;</key>
+		<key>Released song &quot;Starlight&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>2</integer>
 			<key>url</key>
 			<string>https://en.wikipedia.org/wiki/Black_Holes_and_Revelations</string>
 		</dict>
-		<key>Released Song &quot;Uprising&quot;</key>
+		<key>Released song &quot;Uprising&quot;</key>
 		<dict>
 			<key>position</key>
 			<integer>3</integer>
@@ -93,6 +93,130 @@
 			<integer>4</integer>
 			<key>url</key>
 			<string>https://en.wikipedia.org/wiki/Exogenesis:_Symphony#Live_performances</string>
+		</dict>
+	</dict>
+	<key>Keane</key>
+	<dict>
+		<key>Released Song &quot;Somewhere Only We Know&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>1</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Keane_(band)</string>
+		</dict>
+		<key>Bassist Jesse Quin joins band for album &quot;Strangeland</key>
+		<dict>
+			<key>position</key>
+			<integer>2</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Keane_(band)</string>
+		</dict>
+		<key>Went on Hiatus</key>
+		<dict>
+			<key>position</key>
+			<integer>3</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Keane_(band)</string>
+		</dict>
+		<key>Announced new album &quot;Cause and Effect&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>4</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Keane_(band)</string>
+		</dict>
+	</dict>
+	<key>Queen</key>
+	<dict>
+		<key>Queen&apos;s &quot;Bohemian Rhapsody&quot; hits #1 in the UK and stays for a record nine weeks.</key>
+		<dict>
+			<key>position</key>
+			<integer>1</integer>
+			<key>url</key>
+			<string>https://calendar.songfacts.com/timeline/queen/</string>
+		</dict>
+		<key>Queen stages a bicycle race with 65 naked models to provide the video and cover art for their &quot;Bicycle Race&quot; single.</key>
+		<dict>
+			<key>position</key>
+			<integer>2</integer>
+			<key>url</key>
+			<string>https://calendar.songfacts.com/timeline/queen/</string>
+		</dict>
+		<key>The Live Aid concerts take place in Philadelphia and London to raise money for the hungry in Africa. </key>
+		<dict>
+			<key>position</key>
+			<integer>3</integer>
+			<key>url</key>
+			<string>https://calendar.songfacts.com/timeline/queen/</string>
+		</dict>
+		<key>Queen frontman Freddie Mercury issues a statement confirming that he has AIDS.</key>
+		<dict>
+			<key>position</key>
+			<integer>4</integer>
+			<key>url</key>
+			<string>https://calendar.songfacts.com/timeline/queen/</string>
+		</dict>
+	</dict>
+	<key>ArcticMonkeys</key>
+	<dict>
+		<key>Band was founded</key>
+		<dict>
+			<key>position</key>
+			<integer>1</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Arctic_Monkeys</string>
+		</dict>
+		<key>Released album &quot;Whatever People Say I Am, That&apos;s What I&apos;m Not&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>2</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Arctic_Monkeys</string>
+		</dict>
+		<key>Headlined at the Glastonbury Festival</key>
+		<dict>
+			<key>position</key>
+			<integer>3</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Arctic_Monkeys</string>
+		</dict>
+		<key>Released their album &quot;Tranquility Base Hotel &amp; Casino&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>4</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Arctic_Monkeys</string>
+		</dict>
+	</dict>
+	<key>Joji</key>
+	<dict>
+		<key>Started making music under the name &quot;Pink Guy&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>1</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Joji_(musician)</string>
+		</dict>
+		<key>Started making music under the name &quot;Joji&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>2</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Joji_(musician)</string>
+		</dict>
+		<key>Released EP &quot;In Tongues&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>3</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Joji_(musician)</string>
+		</dict>
+		<key>Released song &quot;Yeah Right&quot;</key>
+		<dict>
+			<key>position</key>
+			<integer>4</integer>
+			<key>url</key>
+			<string>https://en.wikipedia.org/wiki/Joji_(musician)</string>
 		</dict>
 	</dict>
 </dict>
